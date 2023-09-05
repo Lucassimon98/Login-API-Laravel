@@ -31,9 +31,10 @@ class UserAdviceController extends Controller
 
     public function store(Request $request) {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:191',
+            'nome' => 'required|string|max:191',
             'senha' => 'required|string|max:191',
             'email' => 'required|email|max:191',
+            'advice' => 'string',
         ]);
         if($validator->fails()) {
             return response()->json([
@@ -42,9 +43,10 @@ class UserAdviceController extends Controller
             ], 422);
         } else {
             $userAdvices = UserAdvice::create([
-                'name' => $request->name,
+                'nome' => $request->nome,
                 'senha' => $request->senha,
                 'email' => $request->email,
+                'advice' => $request->advice,
             ]);
 
             if($userAdvices) {
